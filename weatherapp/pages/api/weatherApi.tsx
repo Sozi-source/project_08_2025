@@ -1,6 +1,6 @@
 import { WeatherData } from "@/interfaces";
 import { useEffect, useState } from "react";
-
+import Image from "next/image";
 const WeatherApi:React.FC=()=>{
 const [city, setCity]= useState("Nairobi")
 const [weather, setWeather] = useState<WeatherData|null>(null)
@@ -30,17 +30,21 @@ try {
 
     setWeather(data)
         
-} catch (err:any) {
+} catch (err:unknown) {
+    if(err instanceof Error){
     console.error("Error", err)
     setError(err.message || "something went wrong")
-    setLoading(false)
+    
+}
+setLoading(false)
 }
 }
+    
 
 useEffect(()=>{
     fetchWeather(city)
     setLoading(false)
-},[])
+},[city])
 
 const handleSearch = (e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
@@ -72,7 +76,8 @@ return(
         <h3 className="text-xl sm:text-2xl font-semibold">Weather in {weather?.location.name}, {weather?.location.country}</h3>
         <p className="text-gray-500 text-sm sm:text-base mt-1">Local time:  {weather?.location.localtime}</p>
     </div>
-        <img src={`https:${weather.current.condition.icon}`} alt={weather.current.condition.text} 
+        <Image src={`https:${weather.current.condition.icon}`} alt={weather.current.condition.text} width={64}
+            height={64} 
         className="w-20 h-20 sm:w-24 sm:h-24 mt-4 sm:mt-0"/>
         </div>
    

@@ -13,11 +13,7 @@ const Home: React.FC=()=>{
           </li>
         </ul>
       </nav>
-      </header>
-      
-      <h1>My weather Alerts</h1>
-
-      
+      </header>     
     </div>
   )
 }
