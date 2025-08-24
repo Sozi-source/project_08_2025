@@ -1,19 +1,8 @@
-import Link from "next/link";
+import WeatherApi from "./api/weatherApi";
 const Home: React.FC=()=>{
-  
-
-
   return(
     <div>
-      <header>
-        <nav>
-        <ul>
-          <li>
-            <Link href="/weather">Weather</Link>
-          </li>
-        </ul>
-      </nav>
-      </header>     
+      <WeatherApi/>
     </div>
   )
 }
